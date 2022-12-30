@@ -12,9 +12,8 @@ const api = require("./api");
 const app = express();
 
 mongoose.set("strictQuery", false);
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+mongoose.connect(process.env.MONGO_URL, {}, () => {
+  console.log("Connected to MongoDB");
 });
 
 app.use(morgan("dev"));
