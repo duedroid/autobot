@@ -9,7 +9,7 @@ require("dotenv").config();
 
 const api = require("./api");
 const commonMiddlewares = require("./middlewares/common");
-const openapi = require("../openapi.json")
+const openapi = require("../openapi.json");
 
 const app = express();
 
@@ -22,11 +22,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
-app.use(
-  "/docs",
-  swaggerUi.serve,
-  swaggerUi.setup(openapi)
-);
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(openapi));
 
 app.get("/", (req, res) => {
   res.json({
