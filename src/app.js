@@ -1,13 +1,15 @@
-const express = require("express");
-const morgan = require("morgan");
-const helmet = require("helmet");
 const cors = require("cors");
+const express = require("express");
+const helmet = require("helmet");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
+const swaggerUi = require("swagger-ui-express");
 
 require("dotenv").config();
 
-const commonMiddlewares = require("./middlewares/common");
 const api = require("./api");
+const commonMiddlewares = require("./middlewares/common");
+const openapi = require("../openapi.json")
 
 const app = express();
 
@@ -20,6 +22,11 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(openapi)
+);
 
 app.get("/", (req, res) => {
   res.json({
