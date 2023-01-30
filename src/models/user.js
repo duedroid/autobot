@@ -3,12 +3,20 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    username: {
+    email: {
       type: String,
       required: true,
       unique: true,
     },
     password: {
+      type: String,
+      required: true,
+    },
+    binanceApiKey: {
+      type: String,
+      required: true,
+    },
+    binanceApiSecret: {
       type: String,
       required: true,
     },
